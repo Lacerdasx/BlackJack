@@ -1,4 +1,7 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using BlackJack.Entities;
+using System.Security.Cryptography.X509Certificates;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace test
 {
@@ -6,8 +9,76 @@ namespace test
     {
         static void Main(string[] args)
         {
-            
-            
+            Deck deck = new Deck();
+            Player player = new Player("Você");
+            Player home = new Player("Casa");
+
+            player.Hand.Add(deck.Distribute());
+            home.Hand.Add(deck.Distribute());
+            player.Hand.Add(deck.Distribute());
+            home.Hand.Add(deck.Distribute());
+
+
+            Console.WriteLine("-------Bem Vindo ao Tigrinho-------");//Começo do jogo
+            Console.WriteLine("Vai Querer iniciar o jogo?(s/n) ");
+
+            string make = Console.ReadLine();
+            if (make.ToLower() != "s")
+            {
+                return;
+            }
+
+            string choice;
+                       do
+            {
+                Console.WriteLine($"Sua mão é");
+                foreach (var card in player.Hand)//Mostra as cartas do jogador
+                {
+                    Console.WriteLine(card.ToString());
+                }
+                Console.WriteLine($"Seus pontos: {player.CalculateScore()}");
+                Console.WriteLine("Vai querer outra carta? (s/n)");
+                choice = Console.ReadLine();
+                if (choice.ToLower() == "s")
+                {
+                    player.Hand.Add(deck.Distribute());//Distribui outra carta para o jogador
+                }
+            } while (choice.ToLower() == "s" && player.CalculateScore() <= 21);//Enquanto o jogador quiser outra carta e não estourar
+
+            if (player.CalculateScore() > 21)
+            {
+                Console.WriteLine("Você estorou!");
+            }
+            while (home.CalculateScore() < 17)
+            {
+                home.Hand.Add(deck.Distribute());
+            }
+            int playerScore = player.CalculateScore();
+            int homeScore = home.CalculateScore();
+
+            if (playerScore > 21)
+            {
+                Console.WriteLine("Você Perdeu");
+            }
+            else if (homeScore > 21 || playerScore > homeScore)
+            {
+                Console.WriteLine("Você ganhou");
+            }
+            else if (playerScore < homeScore)
+            {
+                Console.WriteLine("Voê Perdeu");
+            }
+            else
+            {
+                Console.WriteLine("Empate");
+            }
+            Console.WriteLine($"Mão da Casa: {home.CalculateScore()}");
+            foreach (var card in home.Hand)
+            {
+                Console.WriteLine(card.ToString());
+            }
+
+            Console.ReadKey();
         }
     }
 }
