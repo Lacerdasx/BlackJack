@@ -8,11 +8,11 @@ namespace BlackJack
 {
     internal class Balance
     {
-        public double Amount { get; }
+        public double Amount { get; private set; }
 
-        public Balance()
+        public Balance(double Amont)
         {
-            Amount = 0.0;
+            Amount = amount;
         }
     }
 }

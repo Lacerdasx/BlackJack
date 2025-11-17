@@ -2,6 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Globalization;
 
 namespace test
 {
@@ -13,20 +14,17 @@ namespace test
             Player player = new Player("Você");
             Player home = new Player("Casa");
 
-            player.Hand.Add(deck.Distribute());
+            player.Hand.Add(deck.Distribute());//Distribui duas cartas para o jogador e para a casa
             home.Hand.Add(deck.Distribute());
             player.Hand.Add(deck.Distribute());
             home.Hand.Add(deck.Distribute());
 
 
             Console.WriteLine("-------Bem Vindo ao Tigrinho-------");//Começo do jogo
-            Console.WriteLine("Vai Querer iniciar o jogo?(s/n) ");
+            Console.WriteLine("Quanto você vai querer depositar? ");
+            double d = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            account = new Balance(d);
 
-            string make = Console.ReadLine();
-            if (make.ToLower() != "s")
-            {
-                return;
-            }
 
             string choice;
                        do
