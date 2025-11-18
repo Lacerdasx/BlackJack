@@ -6,7 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace test
+namespace test // NAMESPACE ERRADO
 {
     internal class Program
     {
@@ -27,21 +27,19 @@ namespace test
             Console.WriteLine("🍀🍀🍀🐯🐯Bem Vindo ao Tigrinho🐯🐯🍀🍀🍀");//Começo do jogo
             Console.WriteLine("Quanto você vai querer depositar? 💵 ");
             Console.WriteLine();
-            
+
             double d = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             Balance account = new Balance(d);
             Console.WriteLine();
-           
+
             Console.WriteLine($"Seu saldo é: $ {account.Amount}");
             Console.WriteLine();
             Console.WriteLine("Precione qualquer botão para comecar.");
-            Console.ReadKey(); 
+            Console.ReadKey();
             Console.Clear();
 
-
-
             string choice;
-                       do
+            do
             {
                 Console.WriteLine($"Sua mão é");
                 foreach (var card in player.Hand)//Mostra as cartas do jogador
@@ -69,7 +67,7 @@ namespace test
             Console.WriteLine("Aperte qualquer botão para continuar");
             Console.ReadKey();
             Console.Clear();
-            
+
             int playerScore = player.CalculateScore();
             int homeScore = home.CalculateScore();
 
@@ -107,3 +105,8 @@ namespace test
         }
     }
 }
+
+// FICOU FALTANDO EXEMPLO DE HERANÇA E POLIMORFISMO. EM ALGUNS MOMENTOS VOCE USOU O ENCAPSULAMENTO CORRETAMENTE.
+// ACHO QUE PODERIA TER CRIAR UMA CLASSE PLAYER E OUTRAS DUAS SUBCLASSES, DEALER E GAMER, CADA UMA COM SUAS PARTICULARIDADES.
+// SENTI FALTA TAMBÉM DE UMA ORGANIZAÇÃO DO CODIGO DA PROGRAM, PODERIA TER ORGANIZADO CRIANDO FUNÇÕES E SEPARANDO AS RESPONSABILIDADES, FACILITARIA A LEITURA.
+// RESUMIDAMENTE A LOGICA FICOU OK, MAS FALTARAM ALGUNS CONCEITOS IMPORTANTES DE POO E CLEAN CODE.

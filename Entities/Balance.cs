@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace BlackJack
+namespace BlackJack //namespace incorreto - deve ser BlackJack.Entities
 
 {
     internal class Balance
