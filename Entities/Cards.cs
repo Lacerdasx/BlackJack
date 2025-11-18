@@ -36,7 +36,7 @@ namespace BlackJack.Entities
         }
         public override string ToString()
         {
-            return $"{Value} de {Suit}";
+            return $"{Value} de {Suit}";//
         }
     }
 }

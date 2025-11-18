@@ -18,8 +18,10 @@ namespace BlackJack
         {
             Amount = amount;
         }
+
         public void PayApostate(int playerScore, int homeScore, double betAmount)
         {
+
             if (playerScore > 21 || (homeScore <= 21 && playerScore < homeScore))
             {
                 return;
@@ -42,6 +44,10 @@ namespace BlackJack
             }
             Amount -= betAmount;
             return true;
+        }
+        public void ResetAccount()
+        {
+            Amount = 0;
         }
     }
 }

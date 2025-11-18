@@ -1,8 +1,10 @@
-﻿using BlackJack.Entities;
+﻿using BlackJack;
+using BlackJack.Entities;
+using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Globalization;
 
 namespace test
 {
@@ -10,10 +12,11 @@ namespace test
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
+
             Deck deck = new Deck();
             Player player = new Player("Você");
             Player home = new Player("Casa");
-            double currentBet;
 
             player.Hand.Add(deck.Distribute());//Distribui duas cartas para o jogador e para a casa
             home.Hand.Add(deck.Distribute());
@@ -23,8 +26,14 @@ namespace test
 
             Console.WriteLine("-------Bem Vindo ao Tigrinho-------");//Começo do jogo
             Console.WriteLine("Quanto você vai querer depositar? ");
-            currentBet = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-            Console.WriteLine("Saldo" + currentBet);
+            Console.WriteLine();
+            
+            double d = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            Balance account = new Balance(d);
+
+            Console.WriteLine($"Seu saldo é: {account.Amount}");
+            Console.WriteLine();
+            Console.WriteLine();
 
 
 
@@ -49,7 +58,7 @@ namespace test
             {
                 Console.WriteLine("Você estorou!");
             }
-            while (home.CalculateScore() < 17)
+            while (home.CalculateScore() < 17)//
             {
                 home.Hand.Add(deck.Distribute());
             }
@@ -58,27 +67,34 @@ namespace test
 
             if (playerScore > 21)
             {
-                Console.WriteLine("Você Perdeu");
+                Console.WriteLine("Você Perdeu \n");
+                account.ResetAccount();
+                Console.WriteLine("Seu saldo: " + account.Amount);
             }
             else if (homeScore > 21 || playerScore > homeScore)
             {
-                Console.WriteLine("Você ganhou");
+                Console.WriteLine("Você ganhou \n");
+                account.PayApostate(playerScore, homeScore, d);
+                Console.WriteLine("Seu saldo: " + account.Amount);
             }
             else if (playerScore < homeScore)
             {
                 Console.WriteLine("Voê Perdeu");
+                account.ResetAccount();
+                Console.WriteLine("Seu saldo:" + account.Amount);
             }
             else
             {
                 Console.WriteLine("Empate");
+                account.PayApostate(playerScore, homeScore, 0);
+                Console.WriteLine("Seu saldo:" + account.Amount);
             }
             Console.WriteLine($"Mão da Casa: {home.CalculateScore()}");
+            Console.WriteLine();
             foreach (var card in home.Hand)
             {
                 Console.WriteLine(card.ToString());
             }
-
-            Console.ReadKey();
         }
     }
 }

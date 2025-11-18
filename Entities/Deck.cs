@@ -14,7 +14,7 @@ namespace BlackJack.Entities
 
         public Deck()
         {
-            Cards = new List<Cards>();//Cria a lista de cartas
+            Cards = new List<Cards>();
             Boot();//Chama o método Boot para inicializar as cartas
             Shuffle();//Embaralha as cartas
             Distribute();//Distribui a primeira carta
@@ -27,13 +27,13 @@ namespace BlackJack.Entities
             {
                 foreach (string value in values)//Adiciona todas as combinações de naipes e valores à lista de cartas
                 {
-                    Cards.Add(new Cards(value, suit));//Adds a new card to the deck
+                    Cards.Add(new Cards(value, suit));
                 }
             }
         }
-        private void Shuffle()//Embaralha as cartas
+        private void Shuffle()
         {
-            Cards = Cards.OrderBy(x => Guid.NewGuid()).ToList();//Embaralha a lista de cartas usando GUIDs aleatórios
+            Cards = Cards.OrderBy(x => Guid.NewGuid()).ToList();
         }
         public Cards Distribute()//Distribui uma carta
         {
@@ -41,9 +41,9 @@ namespace BlackJack.Entities
             {
                 return null;
             }
-            Cards cardToReturn = Cards[0];//Pega a primeira carta da lista
+            Cards cardToReturn = Cards[0];
 
-            Cards.RemoveAt(0);//Remove a carta da lista
+            Cards.RemoveAt(0);
 
             return cardToReturn;//Retorna a carta distribuída
         }
