@@ -13,6 +13,7 @@ namespace test
             Deck deck = new Deck();
             Player player = new Player("Você");
             Player home = new Player("Casa");
+            double currentBet;
 
             player.Hand.Add(deck.Distribute());//Distribui duas cartas para o jogador e para a casa
             home.Hand.Add(deck.Distribute());
@@ -22,8 +23,9 @@ namespace test
 
             Console.WriteLine("-------Bem Vindo ao Tigrinho-------");//Começo do jogo
             Console.WriteLine("Quanto você vai querer depositar? ");
-            double d = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-            account = new Balance(d);
+            currentBet = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            Console.WriteLine("Saldo" + currentBet);
+
 
 
             string choice;
