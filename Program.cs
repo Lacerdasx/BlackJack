@@ -24,16 +24,19 @@ namespace test
             home.Hand.Add(deck.Distribute());
 
 
-            Console.WriteLine("-------Bem Vindo ao Tigrinho-------");//Começo do jogo
-            Console.WriteLine("Quanto você vai querer depositar? ");
+            Console.WriteLine("🍀🍀🍀🐯🐯Bem Vindo ao Tigrinho🐯🐯🍀🍀🍀");//Começo do jogo
+            Console.WriteLine("Quanto você vai querer depositar? 💵 ");
             Console.WriteLine();
             
             double d = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             Balance account = new Balance(d);
-
-            Console.WriteLine($"Seu saldo é: {account.Amount}");
             Console.WriteLine();
+           
+            Console.WriteLine($"Seu saldo é: $ {account.Amount}");
             Console.WriteLine();
+            Console.WriteLine("Precione qualquer botão para comecar.");
+            Console.ReadKey(); 
+            Console.Clear();
 
 
 
@@ -56,38 +59,43 @@ namespace test
 
             if (player.CalculateScore() > 21)
             {
-                Console.WriteLine("Você estorou!");
+                Console.WriteLine("Você estorou!🤬");
             }
             while (home.CalculateScore() < 17)//
             {
                 home.Hand.Add(deck.Distribute());
             }
+            Console.WriteLine("❓❓❓❓❓Bora ver a Casa❓❓❓❓❓");
+            Console.WriteLine("Aperte qualquer botão para continuar");
+            Console.ReadKey();
+            Console.Clear();
+            
             int playerScore = player.CalculateScore();
             int homeScore = home.CalculateScore();
 
             if (playerScore > 21)
             {
-                Console.WriteLine("Você Perdeu \n");
+                Console.WriteLine("Você Perdeu 😭😭😭 \n");
                 account.ResetAccount();
-                Console.WriteLine("Seu saldo: " + account.Amount);
+                Console.WriteLine("Seu saldo: $" + account.Amount);
             }
             else if (homeScore > 21 || playerScore > homeScore)
             {
-                Console.WriteLine("Você ganhou \n");
+                Console.WriteLine("Você ganhou🤑🤑🤑🤑 \n");
                 account.PayApostate(playerScore, homeScore, d);
-                Console.WriteLine("Seu saldo: " + account.Amount);
+                Console.WriteLine("Seu saldo: $" + account.Amount);
             }
             else if (playerScore < homeScore)
             {
-                Console.WriteLine("Voê Perdeu");
+                Console.WriteLine("Você Perdeu😭😭😭");
                 account.ResetAccount();
-                Console.WriteLine("Seu saldo:" + account.Amount);
+                Console.WriteLine("Seu saldo: $" + account.Amount);
             }
             else
             {
                 Console.WriteLine("Empate");
                 account.PayApostate(playerScore, homeScore, 0);
-                Console.WriteLine("Seu saldo:" + account.Amount);
+                Console.WriteLine("Seu saldo: $" + account.Amount);
             }
             Console.WriteLine($"Mão da Casa: {home.CalculateScore()}");
             Console.WriteLine();
@@ -95,6 +103,7 @@ namespace test
             {
                 Console.WriteLine(card.ToString());
             }
+            Console.ReadKey();
         }
     }
 }
