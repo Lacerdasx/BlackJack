@@ -41,8 +41,8 @@ namespace test
 
 
             string choice;
-                       do
-            {
+             do{
+                Console.WriteLine($"Sua mão é");
                 Console.WriteLine($"Sua mão é");
                 foreach (var card in player.Hand)//Mostra as cartas do jogador
                 {
@@ -93,11 +93,11 @@ namespace test
             }
             else
             {
-                Console.WriteLine("Empate");
+                Console.WriteLine("Empate😐😐");
                 account.PayApostate(playerScore, homeScore, 0);
                 Console.WriteLine("Seu saldo: $" + account.Amount);
             }
-            Console.WriteLine($"Mão da Casa: {home.CalculateScore()}");
+            Console.WriteLine($"Mão da Casa🐯🐯: {home.CalculateScore()}");
             Console.WriteLine();
             foreach (var card in home.Hand)
             {

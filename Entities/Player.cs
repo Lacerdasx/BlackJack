@@ -17,21 +17,21 @@ namespace BlackJack.Entities
             Hand = new List<Cards>();
         }
 
-       public int CalculateScore()
+       public int CalculateScore()//Calcula a pontuação total da mão do jogador
         {
-            int totalScore = 0;//Inicializa a pontuação total como 0
+            int totalScore = 0;
             int aceCount = 0;
 
 
             foreach (Cards card in Hand)
             {
                 totalScore += card.ValueModifier();//Adiciona o valor da carta à pontuação total
-                if (card.Value == "A")//Conta o número de ases na mão
+                if (card.Value == "A")
                 {
-                    aceCount++;//Incrementa o contador de ases
+                    aceCount++;//Contador de ases
                 }
             }
-            while (totalScore > 21 && aceCount > 0)//Ajusta o valor dos ases se a pontuação total exceder 21
+            while (totalScore > 21 && aceCount > 0)
             {
                 totalScore -= 10;
                 aceCount--;
